@@ -1,0 +1,13 @@
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+
+.app-footer > i {
+  color: #E7411E;
+  margin: 0.2rem;
+}
