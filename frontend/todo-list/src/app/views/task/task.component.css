@@ -8,6 +8,11 @@
   margin-bottom: 15px;
 }
 
+.add-task-card-content {
+  display: flex;
+}
+
 mat-form-field {
   padding-right: 5px;
+  width: 500px;
 }

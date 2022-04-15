@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { TaskComponent } from './views/task/task.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TaskComponent } from './views/task/task.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
