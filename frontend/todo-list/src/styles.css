@@ -2,3 +2,8 @@
 
 html, body { height: 100% }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button:hover {
+  transition: width .3s, height .3s, transform .2s;
+  transform: scale(1.12)
+}

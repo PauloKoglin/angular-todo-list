@@ -9,7 +9,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TodoListComponent implements OnInit {
   tasks: Task[] = []
-  displayedColumns: string[] = ['id', 'task', 'done']
+  displayedColumns: string[] = ['id', 'task', 'done', 'buttons']
 
   constructor(private taskService: TaskService) { }
 
@@ -19,4 +19,7 @@ export class TodoListComponent implements OnInit {
       .subscribe(tasks => this.tasks = tasks)
   }
 
+  handleDeleteButtonClick(): void {
+    alert('this button will delete soon')
+  }
 }

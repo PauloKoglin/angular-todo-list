@@ -1,24 +1,40 @@
 <div class="list-container">
   <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
-    <!-- Position Column -->
+    <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> # </th>
       <td mat-cell *matCellDef="let task"> {{task.id}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Description Column -->
     <ng-container matColumnDef="task">
       <th mat-header-cell *matHeaderCellDef> task </th>
       <td mat-cell *matCellDef="let task"> {{task.description}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Done Column -->
     <ng-container matColumnDef="done">
       <th mat-header-cell *matHeaderCellDef> Done </th>
       <td mat-cell *matCellDef="let task">
         <i *ngIf="task.done" class="material-icons">
           done
         </i>
+      </td>
+    </ng-container>
+
+     <!-- Buttons Column -->
+     <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let task">
+        <div class="todo-list-button-container">
+          <button
+            mat-mini-fab
+            color="warn"
+            aria-label="Click to delete task"
+            (click)="handleDeleteButtonClick()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 
