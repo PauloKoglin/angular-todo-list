@@ -21,4 +21,9 @@ export class TaskService {
     return this.http
       .post<Task>(this.url, task)
   }
+
+  removeTask(id: Number): Observable<any> {
+    return this.http
+      .delete<Number>(`${this.url}/${id}`)
+  }
 }

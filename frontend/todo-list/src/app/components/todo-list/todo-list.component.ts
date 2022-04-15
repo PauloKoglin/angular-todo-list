@@ -14,12 +14,19 @@ export class TodoListComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.loadTasks()
+  }
+
+  handleDeleteButtonClick(task: Task): void {
+    this.taskService
+      .removeTask(task.id)
+      .subscribe()
+      .add(() => this.loadTasks())
+  }
+
+  loadTasks(): void {
     this.taskService
       .getTasks()
       .subscribe(tasks => this.tasks = tasks)
-  }
-
-  handleDeleteButtonClick(): void {
-    alert('this button will delete soon')
   }
 }

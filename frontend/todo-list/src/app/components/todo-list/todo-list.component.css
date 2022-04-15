@@ -7,6 +7,11 @@ table {
   width: 100%;
 }
 
+.mat-column-id {
+  width: 50px;
+  max-width: 70px;
+}
+
 .todo-list-button-container {
   display: flex;
   flex-direction: column;
