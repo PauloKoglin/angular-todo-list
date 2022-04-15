@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { TaskComponent } from './views/task/task.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MainContentComponent } from './components/main-content/main-content.com
     HeaderComponent,
     FooterComponent,
     TodoListComponent,
-    MainContentComponent
+    MainContentComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
