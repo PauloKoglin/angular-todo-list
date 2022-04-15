@@ -1,6 +1,7 @@
 .list-container {
-  justify-content: center;
-  top: 80px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 table {
