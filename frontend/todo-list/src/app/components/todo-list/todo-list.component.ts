@@ -1,42 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/domain/models/task';
-
-const getDescription = (): String => {
-  return `task ${new Date().toISOString()}`;
-}
-
-const fakeData: Task[] = [
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true },
-  { id: 1, description: getDescription(), done: true }
-]
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -44,16 +8,15 @@ const fakeData: Task[] = [
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-
-  tasks: Task[]
+  tasks: Task[] = []
   displayedColumns: string[] = ['id', 'task', 'done']
 
-  constructor() {
-    this.tasks = fakeData
-   }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-
+    this.taskService
+      .getTasks()
+      .subscribe(tasks => this.tasks = tasks)
   }
 
 }

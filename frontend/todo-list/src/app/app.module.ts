@@ -11,6 +11,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { TaskComponent } from './views/task/task.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
