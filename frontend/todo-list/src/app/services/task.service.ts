@@ -26,4 +26,9 @@ export class TaskService {
     return this.http
       .delete<Number>(`${this.url}/${id}`)
   }
+
+  updateTask(task: Task): Observable<Task> {
+    return this.http
+      .put<Task>(`${this.url}/${task.id}`, task)
+  }
 }

@@ -7,8 +7,8 @@ table {
   width: 100%;
 }
 
-.mat-column-id {
-  width: 50px;
+.mat-column-done {
+  width: 60px;
   max-width: 70px;
 }
 

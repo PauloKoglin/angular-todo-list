@@ -9,7 +9,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TodoListComponent implements OnInit {
   tasks: Task[] = []
-  displayedColumns: string[] = ['id', 'task', 'done', 'buttons']
+  displayedColumns: string[] = ['done', 'task', 'buttons']
 
   constructor(private taskService: TaskService) { }
 
@@ -22,6 +22,15 @@ export class TodoListComponent implements OnInit {
       .removeTask(task.id)
       .subscribe()
       .add(() => this.loadTasks())
+  }
+
+  handleToggleTaskDone(task: Task): void {
+    this.taskService
+      .updateTask({
+        ...task,
+        done: !task.done
+      })
+      .subscribe()
   }
 
   loadTasks(): void {
