@@ -1,4 +1,3 @@
-import { ConfigurationService } from 'src/app/services';
 import { ConfigurationDialogComponent } from 'src/app/views';
 
 import { Component, OnInit } from '@angular/core';
