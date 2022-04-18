@@ -1,7 +1,8 @@
+import { Configuration } from 'src/app/domain/models';
+
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Configuration } from 'src/app/domain/models';
 
 @Injectable({
   providedIn: 'root'
