@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Configuration } from 'src/app/domain/models';
-import { ConfigurationService } from 'src/app/services';
+import { ConfigurationService, NotificationService } from 'src/app/services';
 
 @Component({
   selector: 'app-configuration-dialog',
@@ -9,23 +9,33 @@ import { ConfigurationService } from 'src/app/services';
   styleUrls: ['./configuration-dialog.component.css']
 })
 export class ConfigurationDialogComponent implements OnInit {
-  configurations: FormGroup;
+  configurationsGroup: FormGroup;
 
   constructor(
-    private config: ConfigurationService,
+    private configurationService: ConfigurationService,
+    private notificationService: NotificationService,
     private formBuilder: FormBuilder
   ) {
-    this.configurations = this.formBuilder.group({
+    this.configurationsGroup = this.formBuilder.group({
       enableRemoveTask: false,
       showLineNumber: false
     })
   }
 
   ngOnInit(): void {
-    this.config
+    this.configurationService
       .get()
       .subscribe({
-        next: config => this.configurations.setValue({ ...config })
+        next: config => this.configurationsGroup.setValue({ ...config })
+      })
+  }
+
+  handleSaveAndClose(): void {
+    const configuration: Configuration = { ...this.configurationsGroup.value }
+    this.configurationService
+      .update(configuration)
+      .subscribe({
+        complete: () => this.notificationService.showInfoMessage("Configuration saved")
       })
   }
 }

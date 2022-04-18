@@ -1,6 +1,6 @@
 <h1>Configuration</h1>
 <mat-dialog-content>
-  <section class="configuration-options" [formGroup]="configurations">
+  <section class="configuration-options" [formGroup]="configurationsGroup">
     <mat-checkbox formControlName="enableRemoveTask">Enable remove task</mat-checkbox>
     <mat-checkbox formControlName="showLineNumber">Show line number</mat-checkbox>
   </section>
@@ -12,6 +12,7 @@
     </button>
     <button
       mat-button
+      (click)="handleSaveAndClose()"
       [mat-dialog-close]="true"
       cdkFocusInitial
       color="primary">
