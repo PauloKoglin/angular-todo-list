@@ -26,23 +26,15 @@ export class TaskComponent implements OnInit, OnDestroy {
       .get()
       .subscribe({
         next: config => {
-          this.config = {
-            ...config
-          }
+          this.config = { ...config }
           this.loadTasks()
         }
       })
 
-    this.configurationService
-      .onChange
-      .subscribe(
-        config => {
-          this.config = {
-            ...config
-          }
-        },
-        error => console.log(error)
-      )
+    this.configurationService.onChange.subscribe(
+      config => this.config = { ...config },
+      error => console.log(error)
+    )
   }
 
   ngOnDestroy(): void {
@@ -62,10 +54,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   handleToggleTaskDone(task: Task): void {
     this.taskService
-      .updateTask({
-        ...task,
-        done: !task.done
-      })
+      .updateTask({ ...task, done: !task.done })
       .subscribe({
         complete: () => this.notificationService.showInfoMessage("Task marked as done")
       })
