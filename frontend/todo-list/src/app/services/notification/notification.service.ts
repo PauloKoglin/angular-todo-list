@@ -8,8 +8,8 @@ export class NotificationService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  showInfoMessage(message: string) {
-    this.snackBar.open(message, 'OK', {
+  showInfoMessage(message: String) {
+    this.snackBar.open(message as string, 'OK', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: 2000

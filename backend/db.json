@@ -1,24 +1,28 @@
 {
+  "configuration": {
+    "enableRemoveTask": true,
+    "showLineNumber": true
+  },
   "tasks": [
     {
       "id": 1,
       "description": "My first task",
-      "done": false
+      "done": true
     },
     {
       "id": 2,
       "description": "My second task",
-      "done": false
+      "done": true
     },
     {
       "id": 3,
       "description": "My last task",
-      "done": true
+      "done": false
     },
     {
       "description": "new task",
       "id": 8,
-      "done": true
+      "done": false
     },
     {
       "description": "test2",
@@ -33,6 +37,99 @@
     {
       "description": "new task for today",
       "id": 14
+    },
+    {
+      "description": "new task at first place",
+      "id": 15,
+      "done": true
+    },
+    {
+      "description": "test",
+      "id": 16
+    },
+    {
+      "description": "new task",
+      "id": 17,
+      "done": true
+    },
+    {
+      "description": "my new task",
+      "id": 18
+    },
+    {
+      "description": "toast added",
+      "id": 19
+    },
+    {
+      "description": "test",
+      "id": 20
+    },
+    {
+      "description": "new",
+      "id": 21,
+      "done": true
+    },
+    {
+      "description": "ops",
+      "id": 22,
+      "done": true
+    },
+    {
+      "description": "new",
+      "id": 23
+    },
+    {
+      "description": "123",
+      "id": 24,
+      "done": true
+    },
+    {
+      "description": "ter",
+      "id": 25,
+      "done": true
+    },
+    {
+      "description": "new task cool",
+      "id": 26
+    },
+    {
+      "description": "asdasd",
+      "id": 27
+    },
+    {
+      "description": "asdasd",
+      "id": 28
+    },
+    {
+      "description": "asdvv df dfs",
+      "id": 29,
+      "done": true
+    },
+    {
+      "description": "123asdad",
+      "id": 30,
+      "done": true
+    },
+    {
+      "description": "asdasd",
+      "id": 31
+    },
+    {
+      "description": "asdasd",
+      "id": 32,
+      "done": true
+    },
+    {
+      "description": "asdasd",
+      "id": 36
+    },
+    {
+      "description": "asdasd",
+      "id": 37
+    },
+    {
+      "description": "asds",
+      "id": 38
     }
   ]
 }

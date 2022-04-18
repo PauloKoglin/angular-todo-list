@@ -1,7 +1,7 @@
-import { TaskService, NotificationService } from 'src/app/services';
+import { TaskService, NotificationService, ConfigurationService } from 'src/app/services';
 import { Task } from 'src/app/domain/models';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,18 +9,28 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, OnDestroy {
   tasks: Task[] = []
   displayedColumns: string[] = ['done', 'task', 'buttons']
   taskDescriptionFormControl: FormControl = new FormControl('', [Validators.required])
 
   constructor(
       private taskService: TaskService,
-      private notificationService: NotificationService
+      private notificationService: NotificationService,
+      private configurationService: ConfigurationService
   ) { }
 
   ngOnInit(): void {
     this.loadTasks()
+    this.configurationService.onChange
+      .subscribe(
+        config => this.notificationService.showInfoMessage(JSON.stringify(config)),
+        error => console.log(error)
+      )
+  }
+
+  ngOnDestroy(): void {
+    this.configurationService.onChange.unsubscribe()
   }
 
   handleDeleteButtonClick(task: Task): void {
