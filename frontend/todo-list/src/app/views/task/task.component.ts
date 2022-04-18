@@ -26,8 +26,12 @@ export class TaskComponent implements OnInit {
   handleDeleteButtonClick(task: Task): void {
     this.taskService
       .removeTask(task.id)
-      .subscribe()
-      .add(() => this.loadTasks())
+      .subscribe({
+        complete: () => {
+          this.openSnackBar("Task removed")
+          this.loadTasks()
+        }
+      })
   }
 
   handleToggleTaskDone(task: Task): void {
@@ -36,7 +40,9 @@ export class TaskComponent implements OnInit {
         ...task,
         done: !task.done
       })
-      .subscribe()
+      .subscribe({
+        complete: () => this.openSnackBar("Task marked as done")
+      })
   }
 
   loadTasks(): void {
@@ -52,14 +58,14 @@ export class TaskComponent implements OnInit {
       .addTask(task)
       .subscribe({
         complete: () => {
-          this.openSnackBar()
+          this.openSnackBar("Task added")
           this.loadTasks()
         }
       })
   }
 
-  openSnackBar() {
-    this.snackBar.open('Task added', 'OK', {
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'OK', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: 2000
