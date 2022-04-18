@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './material.module';
 import { FooterComponent } from './components/footer/footer.component';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { TaskComponent } from './views/task/task.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    TodoListComponent,
     MainContentComponent,
     TaskComponent
   ],
