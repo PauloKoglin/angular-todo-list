@@ -37,7 +37,6 @@ export class TaskComponent implements OnInit, OnDestroy {
       .onChange
       .subscribe(
         config => {
-          this.notificationService.showInfoMessage("Configuration updated!")
           this.config = {
             ...config
           }

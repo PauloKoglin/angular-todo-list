@@ -35,7 +35,7 @@ export class ConfigurationDialogComponent implements OnInit {
     this.configurationService
       .update(configuration)
       .subscribe({
-        complete: () => this.notificationService.showInfoMessage("Configuration saved")
+        next: () => this.notificationService.showInfoMessage("Configuration saved")
       })
   }
 }

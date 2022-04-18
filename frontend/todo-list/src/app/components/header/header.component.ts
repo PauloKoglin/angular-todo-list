@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
 
   handleConfigClick() {
     const dialogRef = this.dialog.open(ConfigurationDialogComponent)
-    dialogRef.afterClosed().subscribe(() => console.log("config closed"))
+    dialogRef.afterClosed().subscribe()
   }
-
 }
