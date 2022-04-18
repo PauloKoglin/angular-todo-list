@@ -1,8 +1,9 @@
+import { NotificationService } from 'src/app/services/notification.service';
+import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/app/domain/models/task';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Task } from 'src/app/domain/models/task';
-import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task',
@@ -16,7 +17,7 @@ export class TaskComponent implements OnInit {
 
   constructor(
       private taskService: TaskService,
-      private snackBar: MatSnackBar
+      private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +29,7 @@ export class TaskComponent implements OnInit {
       .removeTask(task.id)
       .subscribe({
         complete: () => {
-          this.openSnackBar("Task removed")
+          this.notificationService.showInfoMessage("Task removed")
           this.loadTasks()
         }
       })
@@ -41,7 +42,7 @@ export class TaskComponent implements OnInit {
         done: !task.done
       })
       .subscribe({
-        complete: () => this.openSnackBar("Task marked as done")
+        complete: () => this.notificationService.showInfoMessage("Task marked as done")
       })
   }
 
@@ -58,17 +59,9 @@ export class TaskComponent implements OnInit {
       .addTask(task)
       .subscribe({
         complete: () => {
-          this.openSnackBar("Task added")
+          this.notificationService.showInfoMessage("Task added")
           this.loadTasks()
         }
       })
-  }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 2000
-    });
   }
 }
