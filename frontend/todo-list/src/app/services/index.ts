@@ -1,2 +1,2 @@
-export * from './notification.service'
-export * from './task.service'
+export * from './notification/notification.service'
+export * from './task/task.service'

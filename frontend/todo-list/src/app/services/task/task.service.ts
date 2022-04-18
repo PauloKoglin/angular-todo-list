@@ -1,4 +1,4 @@
-import { Task } from '../domain/models/task';
+import { Task } from '../../domain/models';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
