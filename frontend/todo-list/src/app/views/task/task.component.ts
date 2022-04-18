@@ -47,6 +47,7 @@ export class TaskComponent implements OnInit {
 
   onSubmit(): void {
     const task: Task = { description: this.taskDescriptionFormControl.value } as Task
+    this.taskDescriptionFormControl.reset()
     this.taskService
       .addTask(task)
       .subscribe({
