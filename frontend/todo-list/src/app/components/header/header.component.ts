@@ -1,5 +1,8 @@
+import { ConfigurationService } from 'src/app/services';
+import { ConfigurationDialogComponent } from 'src/app/views';
+
 import { Component, OnInit } from '@angular/core';
-import { ConfigurationService } from 'src/app/services/configuration/configuration.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -7,19 +10,24 @@ import { ConfigurationService } from 'src/app/services/configuration/configurati
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private configurationService: ConfigurationService) { }
+  constructor(
+    private configurationService: ConfigurationService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
   }
 
   handleConfigClick() {
-    alert("this will be the config button")
-    this.configurationService
-      .update({
-        enableRemoveTask: true,
-        showLineNumber: true
-      })
-      .subscribe()
+    const dialogRef = this.dialog.open(ConfigurationDialogComponent)
+    dialogRef.afterClosed().subscribe(() => console.log("config closed"))
+
+    // this.configurationService
+    //   .update({
+    //     enableRemoveTask: true,
+    //     showLineNumber: true
+    //   })
+    //   .subscribe()
   }
 
 }
