@@ -1,7 +1,7 @@
 import { TaskService, NotificationService, ConfigurationService } from 'src/app/services';
 import { Configuration, Task } from 'src/app/domain/models';
 
-import { Component, OnDestroy, OnInit, ViewRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
