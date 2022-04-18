@@ -1,8 +1,15 @@
 .app-header {
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   top: 0;
   z-index: 2;
   padding: 25px;
+}
+
+.header-spacer {
+  flex: 1 1 auto;
 }
 
 .app-header i {

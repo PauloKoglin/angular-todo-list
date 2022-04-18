@@ -12,4 +12,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleConfigClick() {
+    alert("this will be the config button")
+  }
+
 }
