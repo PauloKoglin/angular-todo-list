@@ -14,10 +14,12 @@ export class HeaderComponent implements OnInit {
 
   handleConfigClick() {
     alert("this will be the config button")
-    this.configurationService.update({
-      enableRemoveTask: true,
-      showLineNumber: true
-    })
+    this.configurationService
+      .update({
+        enableRemoveTask: true,
+        showLineNumber: true
+      })
+      .subscribe()
   }
 
 }

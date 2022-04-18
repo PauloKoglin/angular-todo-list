@@ -12,14 +12,17 @@ export class ConfigurationService {
 
   constructor(private http: HttpClient) { }
 
-  update(config: Configuration): void {
-    this.http
-      .post<Configuration>(this.url, config)
-      .subscribe({
-        next: config => {
-          this.onChange.next(config)
-        }
-      })
+  update(config: Configuration): Observable<Configuration> {
+    return new Observable(subscriber => {
+      this.http
+        .post<Configuration>(this.url, config)
+        .subscribe({
+          next: config => {
+            this.onChange.next(config)
+            subscriber.next(config)
+          }
+        })
+    })
   }
 
   get(): Observable<Configuration> {
