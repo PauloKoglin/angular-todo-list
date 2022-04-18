@@ -1,6 +1,5 @@
-import { NotificationService } from 'src/app/services/notification.service';
-import { TaskService } from 'src/app/services/task.service';
-import { Task } from 'src/app/domain/models/task';
+import { TaskService, NotificationService } from 'src/app/services';
+import { Task } from 'src/app/domain/models';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
