@@ -12,7 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class TaskComponent implements OnInit, OnDestroy {
   config: Configuration | undefined
   tasks: Task[] = []
-  displayedColumns: string[] = ['done', 'task', 'buttons']
+  displayedColumns: string[] = this.getColumnsToDisplay()
   taskDescriptionFormControl: FormControl = new FormControl('', [Validators.required])
 
   constructor(
@@ -27,18 +27,26 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe({
         next: config => {
           this.config = { ...config }
+          this.displayedColumns = this.getColumnsToDisplay()
           this.loadTasks()
         }
       })
 
     this.configurationService.onChange.subscribe(
-      config => this.config = { ...config },
+      config => {
+        this.config = { ...config }
+        this.displayedColumns = this.getColumnsToDisplay()
+      },
       error => console.log(error)
     )
   }
 
   ngOnDestroy(): void {
     this.configurationService.onChange.unsubscribe()
+  }
+
+  getColumnsToDisplay(): string[] {
+    return this.config?.showLineNumber ? ['lineNumber', 'done', 'task', 'buttons']: ['done', 'task', 'buttons']
   }
 
   handleDeleteButtonClick(task: Task): void {
@@ -53,10 +61,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   handleToggleTaskDone(task: Task): void {
+    this.tasks = this.tasks.map(item => (item.id === task.id ? { ...item, done: !item.done } : item))
     this.taskService
       .updateTask({ ...task, done: !task.done })
       .subscribe({
-        complete: () => this.notificationService.showInfoMessage("Task marked as done")
+        next: task => this.notificationService.showInfoMessage(`Task marked as ${task.done ? "done" : "undone"}`)
       })
   }
 
