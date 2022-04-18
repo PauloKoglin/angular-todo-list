@@ -1,5 +1,5 @@
 import { TaskService, NotificationService, ConfigurationService } from 'src/app/services';
-import { Task } from 'src/app/domain/models';
+import { Configuration, Task } from 'src/app/domain/models';
 
 import { Component, OnDestroy, OnInit, ViewRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit, OnDestroy {
+  config: Configuration | undefined
   tasks: Task[] = []
   displayedColumns: string[] = ['done', 'task', 'buttons']
   taskDescriptionFormControl: FormControl = new FormControl('', [Validators.required])
@@ -21,8 +22,19 @@ export class TaskComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loadTasks()
-    this.configurationService.onChange
+    this.configurationService
+      .get()
+      .subscribe({
+        next: config => {
+          this.config = {
+            ...config
+          }
+          this.loadTasks()
+        }
+      })
+
+    this.configurationService
+      .onChange
       .subscribe(
         config => this.notificationService.showInfoMessage(JSON.stringify(config)),
         error => console.log(error)

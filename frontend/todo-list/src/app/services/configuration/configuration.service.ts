@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Configuration } from 'src/app/domain/models';
 
 @Injectable({
@@ -19,5 +20,9 @@ export class ConfigurationService {
           this.onChange.next(config)
         }
       })
+  }
+
+  get(): Observable<Configuration> {
+    return this.http.get<Configuration>(this.url)
   }
 }
