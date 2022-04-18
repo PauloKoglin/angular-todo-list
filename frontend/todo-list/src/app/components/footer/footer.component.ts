@@ -12,4 +12,8 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleGithubClick(): void {
+    window.open("https://github.com/PauloKoglin/angular-todo-list/tree/main/frontend/todo-list", '_blank')
+  }
+
 }

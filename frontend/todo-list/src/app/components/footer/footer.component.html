@@ -1,7 +1,13 @@
 <mat-toolbar color="primary" class="app-footer">
-  <span>Developed with</span>
-  <i class="material-icons">
-    favorite
-  </i>
-  <span>by Paulo Koglin</span>
+  <button mat-button (click)="handleGithubClick()" aria-label="View on Github">
+    <mat-icon>code</mat-icon>
+    Github
+  </button>
+  <div class="footer-develeped-container">
+    <span>Developed with</span>
+    <mat-icon class="footer-fav-icon">
+      favorite
+    </mat-icon>
+    <span>by Paulo Koglin</span>
+  </div>
 </mat-toolbar>

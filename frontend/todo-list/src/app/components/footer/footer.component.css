@@ -3,12 +3,22 @@
   bottom: 0;
   height: 60px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-weight: 100;
   font-size: 1.2rem;
 }
 
-.app-footer > i {
+.footer-fav-icon {
   color: #E7411E;
   margin: 0.2rem;
+}
+
+.footer-develeped-container {
+  padding: 5px;
+  justify-items: center;
+  display: flex;
+}
+
+.app-footer > button {
+  align-self: center;
 }
