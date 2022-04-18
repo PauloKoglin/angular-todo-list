@@ -51,7 +51,7 @@ export class TaskComponent implements OnInit {
       .subscribe(tasks => this.tasks = tasks.reverse())
   }
 
-  onSubmit(): void {
+  handleSubmit(): void {
     const task: Task = { description: this.taskDescriptionFormControl.value } as Task
     this.taskDescriptionFormControl.reset()
     this.taskService
@@ -71,5 +71,4 @@ export class TaskComponent implements OnInit {
       duration: 2000
     });
   }
-
 }
