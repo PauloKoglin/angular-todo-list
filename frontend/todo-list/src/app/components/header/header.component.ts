@@ -10,10 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private configurationService: ConfigurationService,
-    private dialog: MatDialog
-  ) { }
+  constructor( private dialog: MatDialog ) { }
 
   ngOnInit(): void {
   }
@@ -21,13 +18,6 @@ export class HeaderComponent implements OnInit {
   handleConfigClick() {
     const dialogRef = this.dialog.open(ConfigurationDialogComponent)
     dialogRef.afterClosed().subscribe(() => console.log("config closed"))
-
-    // this.configurationService
-    //   .update({
-    //     enableRemoveTask: true,
-    //     showLineNumber: true
-    //   })
-    //   .subscribe()
   }
 
 }
