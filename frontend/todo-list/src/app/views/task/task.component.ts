@@ -76,15 +76,19 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit(): void {
-    const task: Task = { description: this.taskDescriptionFormControl.value } as Task
-    this.taskDescriptionFormControl.reset()
-    this.taskService
-      .addTask(task)
-      .subscribe({
-        complete: () => {
-          this.notificationService.showInfoMessage("Task added")
-          this.loadTasks()
-        }
-      })
+    if (!this.taskDescriptionFormControl.valid) {
+      this.notificationService.showErrorMessage("Task can't be added")
+    } else {
+      const task: Task = { description: this.taskDescriptionFormControl.value } as Task
+      this.taskDescriptionFormControl.reset()
+      this.taskService
+        .addTask(task)
+        .subscribe({
+          complete: () => {
+            this.notificationService.showInfoMessage("Task added")
+            this.loadTasks()
+          }
+        })
+    }
   }
 }
