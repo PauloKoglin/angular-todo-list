@@ -77,7 +77,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   handleSubmit(): void {
     if (!this.taskDescriptionFormControl.valid) {
-      this.notificationService.showErrorMessage("Task can't be added")
+      this.notificationService.showErrorMessage("Task can't be added. Please fill all required fields.")
     } else {
       const task: Task = { description: this.taskDescriptionFormControl.value } as Task
       this.taskDescriptionFormControl.reset()
