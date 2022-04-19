@@ -12,7 +12,17 @@ export class NotificationService {
     this.snackBar.open(message as string, 'OK', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      duration: 2000
+      duration: 2000,
+      panelClass: 'info-notification-bar'
+    });
+  }
+
+  showErrorMessage(message: String) {
+    this.snackBar.open(message as string, 'OK', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 3000,
+      panelClass: 'error-notification-bar'
     });
   }
 }

@@ -7,3 +7,13 @@ button:hover {
   transition: width .3s, height .3s, transform .2s;
   transform: scale(1.12)
 }
+
+.error-notification-bar {
+  background-color: rgb(201, 15, 15);
+  font-weight: 500;
+}
+
+.info-notification-bar {
+  background-color: rgb(39, 176, 82);
+  font-weight: 500;
+}
