@@ -1,0 +1,11 @@
+.dashboard-card {
+  width: 300px;
+  height: 200px;
+}
+
+.dashboard-card:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+  transition: width .2s, height .2s, transform .3s;
+  transform: scale(1.02)
+}
