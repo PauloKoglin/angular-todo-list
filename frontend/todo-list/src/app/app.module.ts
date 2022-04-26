@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { TaskComponent, ConfigurationDialogComponent } from './views';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     MainContentComponent,
     TaskComponent,
-    ConfigurationDialogComponent
+    ConfigurationDialogComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
