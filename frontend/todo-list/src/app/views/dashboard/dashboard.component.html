@@ -1,11 +1,50 @@
 <mat-grid-list cols="4" rowHeight="200px">
-  <mat-card routerLink="/tasks" class="dashboard-card">
-    <mat-card-title-group>
-      <mat-card-title>Total Tasks</mat-card-title>
-    </mat-card-title-group>
-    <mat-card-content>
-      {{19}}
-    </mat-card-content>
-  </mat-card>
-
+  <mat-grid-tile>
+    <mat-card routerLink="/tasks" class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Done</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <b>{{amountTasksDone}}</b>/{{tasks.length}}
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/tasks" class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Todo</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <b>{{amountTasksTodo}}</b>/{{tasks.length}}
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Empty card</mat-card-title>
+      </mat-card-title-group>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Empty card</mat-card-title>
+      </mat-card-title-group>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Empty card</mat-card-title>
+      </mat-card-title-group>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="dashboard-card">
+      <mat-card-title-group>
+        <mat-card-title>Empty card</mat-card-title>
+      </mat-card-title-group>
+    </mat-card>
+  </mat-grid-tile>
 </mat-grid-list>
