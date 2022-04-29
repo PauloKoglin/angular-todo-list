@@ -3,6 +3,7 @@ import { Configuration, Task } from 'src/app/domain/models';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -10,35 +11,41 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit, OnDestroy {
+  filterDone: boolean | undefined
   config: Configuration | undefined
   tasks: Task[] = []
   displayedColumns: string[] = this.getColumnsToDisplay()
   taskDescriptionFormControl: FormControl = new FormControl('', [Validators.required])
 
   constructor(
+      private route: ActivatedRoute,
       private taskService: TaskService,
       private notificationService: NotificationService,
       private configurationService: ConfigurationService
   ) { }
 
   ngOnInit(): void {
-    this.configurationService
-      .get()
-      .subscribe({
-        next: config => {
-          this.config = { ...config }
-          this.displayedColumns = this.getColumnsToDisplay()
-          this.loadTasks()
-        }
-      })
+    this.route.queryParams.subscribe(params => {
+      this.filterDone = params['done'] ? params['done'] === 'true' : undefined
+      this.loadConfiguration()
+    })
 
-    this.configurationService.onChange.subscribe(
-      config => {
+    this.configurationService.onChange.subscribe(config => {
         this.config = { ...config }
         this.displayedColumns = this.getColumnsToDisplay()
       },
       error => console.log(error)
     )
+  }
+
+  loadConfiguration() {
+    this.configurationService.get().subscribe({
+      next: config => {
+        this.config = { ...config }
+        this.displayedColumns = this.getColumnsToDisplay()
+        this.loadTasks()
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -50,8 +57,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   handleDeleteButtonClick(task: Task): void {
-    this.taskService
-      .removeTask(task.id)
+    this.taskService.removeTask(task.id)
       .subscribe({
         complete: () => {
           this.notificationService.showInfoMessage("Task removed")
@@ -62,17 +68,14 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   handleToggleTaskDone(task: Task): void {
     this.tasks = this.tasks.map(item => (item.id === task.id ? { ...item, done: !item.done } : item))
-    this.taskService
-      .updateTask({ ...task, done: !task.done })
-      .subscribe({
-        next: task => this.notificationService.showInfoMessage(`Task marked as ${task.done ? "done" : "undone"}`)
-      })
+    this.taskService.updateTask({ ...task, done: !task.done }).subscribe({
+      next: task => this.notificationService.showInfoMessage(`Task marked as ${task.done ? "done" : "undone"}`)
+    })
   }
 
   loadTasks(): void {
-    this.taskService
-      .getTasks()
-      .subscribe(tasks => this.tasks = tasks.reverse())
+    this.taskService.getTasks()
+      .subscribe(tasks => this.tasks = tasks.filter(task => this.filterDone !== undefined ? task.done === this.filterDone : true).reverse())
   }
 
   handleSubmit(): void {
@@ -81,8 +84,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     } else {
       const task: Task = { description: this.taskDescriptionFormControl.value } as Task
       this.taskDescriptionFormControl.reset()
-      this.taskService
-        .addTask(task)
+      this.taskService.addTask(task)
         .subscribe({
           complete: () => {
             this.notificationService.showInfoMessage("Task added")

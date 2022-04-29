@@ -1,6 +1,6 @@
 <mat-grid-list cols="4" rowHeight="200px">
   <mat-grid-tile>
-    <mat-card routerLink="/tasks" class="dashboard-card">
+    <mat-card routerLink="/tasks" [queryParams]="{done: true}" class="dashboard-card">
       <mat-card-title-group>
         <mat-card-title>Done</mat-card-title>
       </mat-card-title-group>
@@ -10,7 +10,7 @@
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile>
-    <mat-card routerLink="/tasks" class="dashboard-card">
+    <mat-card routerLink="/tasks" [queryParams]="{done: false}" class="dashboard-card">
       <mat-card-title-group>
         <mat-card-title>Todo</mat-card-title>
       </mat-card-title-group>

@@ -2,7 +2,7 @@ import { Task } from '../../domain/models';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,14 @@ export class TaskService {
   getTasks(): Observable<Task[]> {
     return this.http
       .get<Task[]>(this.url)
+      .pipe(
+        map(tasks => tasks.map(task => {
+          return {
+            ...task,
+            done: task.done === undefined ? false : task.done
+          }
+        }))
+      )
   }
 
   addTask(task: Task): Observable<Task> {
