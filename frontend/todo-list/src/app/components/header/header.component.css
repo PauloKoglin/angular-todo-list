@@ -9,6 +9,16 @@
   flex: 1 1 auto;
 }
 
-.app-header i {
+.header-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header-icon:hover {
+  cursor: pointer;
+}
+
+.header-icon i {
   margin-right: 0.2rem;
 }
