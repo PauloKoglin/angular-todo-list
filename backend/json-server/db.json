@@ -90,11 +90,13 @@
     },
     {
       "description": "new task cool",
-      "id": 26
+      "id": 26,
+      "done": true
     },
     {
       "description": "asdasd",
-      "id": 27
+      "id": 27,
+      "done": true
     },
     {
       "description": "asdasd",
@@ -109,27 +111,6 @@
       "description": "123asdad",
       "id": 30,
       "done": true
-    },
-    {
-      "description": "asdasd",
-      "id": 31
-    },
-    {
-      "description": "asdasd",
-      "id": 32,
-      "done": true
-    },
-    {
-      "description": "asdasd",
-      "id": 36
-    },
-    {
-      "description": "asdasd",
-      "id": 37
-    },
-    {
-      "description": "asds",
-      "id": 38
     }
   ]
 }
