@@ -1,4 +1,4 @@
-package com.koglin.todolist.models;
+package com.koglin.todolist.domain.models;
 
 public class TaskModel {
     private int id;

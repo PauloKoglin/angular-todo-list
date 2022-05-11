@@ -1,11 +1,11 @@
-package com.koglin.todolist.services;
+package com.koglin.todolist.presentation;
 
-import com.koglin.todolist.models.TaskModel;
+import com.koglin.todolist.domain.models.TaskModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TaskService {
+public class TaskController {
 
     @GetMapping("/tasks")
     public TaskModel getTask() {
