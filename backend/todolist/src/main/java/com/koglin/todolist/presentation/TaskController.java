@@ -9,6 +9,6 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public TaskModel getTask() {
-        return new TaskModel(1, "My task", false);
+        return new TaskModel(1L, "My task", false);
     }
 }
