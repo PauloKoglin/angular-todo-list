@@ -1,14 +1,42 @@
 package com.koglin.todolist.presentation;
 
 import com.koglin.todolist.domain.models.TaskModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.koglin.todolist.domain.useCases.SaveTask;
+import com.koglin.todolist.presentation.helpers.CustomRestController;
+import com.koglin.todolist.presentation.payloads.TaskPayload;
+import org.springframework.web.servlet.function.*;
 
-@RestController
-public class TaskController {
+import java.util.List;
 
-    @GetMapping("/tasks")
-    public TaskModel getTask() {
-        return new TaskModel(1L, "My task", false);
+public class TaskController extends CustomRestController {
+
+    private final SaveTask saveTask;
+
+    public TaskController(SaveTask saveTask) {
+        super("/tasks");
+        this.saveTask = saveTask;
+    }
+
+
+    public ServerResponse getTasks(ServerRequest ignoredRequest) {
+        List<TaskModel> tasks = this.saveTask.findAll();
+        return ServerResponse
+                .ok()
+                .body(tasks);
+    }
+
+    public ServerResponse saveTask(ServerRequest request) {
+        TaskPayload payload;
+        // TODO: remove try catch
+        try {
+            payload = request.body(TaskPayload.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        final TaskModel newTask = new TaskModel(payload.getId(), payload.getDescription(), payload.getDone());
+        TaskModel savedTask = this.saveTask.perform(newTask);
+        return ServerResponse
+                .ok()
+                .body(savedTask);
     }
 }

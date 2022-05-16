@@ -14,6 +14,8 @@ public class TaskEntity {
     @Column(nullable = false)
     private Boolean done;
 
+    public TaskEntity() {}
+
     public TaskEntity(Long id, String description, Boolean done) {
         this.id = id;
         this.description = description;
