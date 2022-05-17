@@ -18,18 +18,16 @@ public class TaskController {
     }
 
     public ServerResponse getTasks(HttpRequestAdapter ignoredRequest) {
-        List<TaskModel> tasks = this.saveTask.findAll();
         return ServerResponse
                 .ok()
-                .body(tasks);
+                .body(this.saveTask.findAll());
     }
 
     public ServerResponse saveTask(HttpRequestAdapter request) {
         TaskPayload payload = request.body(TaskPayload.class);
         final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
-        TaskModel savedTask = this.saveTask.perform(newTask);
         return ServerResponse
                 .ok()
-                .body(savedTask);
+                .body(this.saveTask.perform(newTask));
     }
 }
