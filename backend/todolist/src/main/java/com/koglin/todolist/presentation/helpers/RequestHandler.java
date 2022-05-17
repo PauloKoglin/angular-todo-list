@@ -14,4 +14,12 @@ public abstract class RequestHandler {
             return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error:" + exception.getMessage());
         }
     }
+
+    public static ServerResponse handle(NoArgsRequest<ServerResponse> handler) {
+        try {
+            return handler.perform();
+        } catch (RuntimeException exception) {
+            return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error:" + exception.getMessage());
+        }
+    }
 }

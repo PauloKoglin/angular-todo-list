@@ -17,7 +17,7 @@ public class TaskController {
         this.saveTask = saveTask;
     }
 
-    public ServerResponse getTasks(HttpRequestAdapter ignoredRequest) {
+    public ServerResponse getTasks() {
         return ServerResponse
                 .ok()
                 .body(this.saveTask.findAll());
