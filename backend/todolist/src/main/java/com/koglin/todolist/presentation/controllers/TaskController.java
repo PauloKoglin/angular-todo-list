@@ -1,24 +1,24 @@
 package com.koglin.todolist.presentation.controllers;
 
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.domain.useCases.SaveTask;
+import com.koglin.todolist.domain.services.TaskService;
 import com.koglin.todolist.presentation.adapters.HttpRequestAdapter;
 import com.koglin.todolist.presentation.payloads.TaskPayload;
 import org.springframework.web.servlet.function.*;
 
 public class TaskController {
 
-    private final SaveTask saveTask;
+    private final TaskService taskService;
 
-    public TaskController(SaveTask saveTask) {
+    public TaskController(TaskService taskService) {
         super();
-        this.saveTask = saveTask;
+        this.taskService = taskService;
     }
 
     public ServerResponse getTasks() {
         return ServerResponse
                 .ok()
-                .body(this.saveTask.findAll());
+                .body(this.taskService.findAll());
     }
 
     public ServerResponse saveTask(HttpRequestAdapter request) {
@@ -26,6 +26,6 @@ public class TaskController {
         final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
         return ServerResponse
                 .ok()
-                .body(this.saveTask.perform(newTask));
+                .body(this.taskService.perform(newTask));
     }
 }

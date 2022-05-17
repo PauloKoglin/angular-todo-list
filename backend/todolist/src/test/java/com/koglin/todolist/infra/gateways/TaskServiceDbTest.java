@@ -1,28 +1,27 @@
 package com.koglin.todolist.infra.gateways;
 
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.domain.useCases.SaveTask;
+import com.koglin.todolist.domain.services.TaskService;
 import com.koglin.todolist.infra.database.entities.TaskEntity;
 import com.koglin.todolist.infra.database.repositories.TaskRepository;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.scheduling.config.Task;
 
 
 import static org.mockito.Mockito.*;
 
-public class SaveTaskDbTest {
+public class TaskServiceDbTest {
 
     private TaskRepository taskRepositoryMock;
-    private SaveTask sut;
+    private TaskService sut;
 
     @BeforeEach
     void beforeEach() {
         this.taskRepositoryMock = mock(TaskRepository.class);
         when(taskRepositoryMock.save(any(TaskEntity.class))).thenReturn(new TaskEntity(1L, "any_value", false));
 
-        this.sut = new SaveTaskDb(this.taskRepositoryMock);
+        this.sut = new TaskServiceDb(this.taskRepositoryMock);
     }
     @Test
     void Should_throw_if_empty_description_is_provided() {

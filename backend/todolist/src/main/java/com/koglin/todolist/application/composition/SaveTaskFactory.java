@@ -1,8 +1,8 @@
 package com.koglin.todolist.application.composition;
 
-import com.koglin.todolist.domain.useCases.SaveTask;
+import com.koglin.todolist.domain.services.TaskService;
 import com.koglin.todolist.infra.database.repositories.TaskRepository;
-import com.koglin.todolist.infra.gateways.SaveTaskDb;
+import com.koglin.todolist.infra.gateways.TaskServiceDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +16,9 @@ public class SaveTaskFactory {
     EntityManager entityManager;
 
     @Bean
-    public SaveTask makeSaveTask() {
+    public TaskService makeSaveTask() {
         TaskRepository repository = RepositoryFactory.makeTaskRepository(entityManager);
-        return new SaveTaskDb(repository);
+        return new TaskServiceDb(repository);
     }
 
 }

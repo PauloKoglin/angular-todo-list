@@ -1,7 +1,7 @@
 package com.koglin.todolist.infra.gateways;
 
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.domain.useCases.SaveTask;
+import com.koglin.todolist.domain.services.TaskService;
 import com.koglin.todolist.infra.database.entities.TaskEntity;
 import com.koglin.todolist.infra.database.repositories.TaskRepository;
 
@@ -9,9 +9,9 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SaveTaskDb implements SaveTask {
+public class TaskServiceDb implements TaskService {
     private final TaskRepository taskRepository;
-    public SaveTaskDb(TaskRepository taskRepository) {
+    public TaskServiceDb(TaskRepository taskRepository) {
         super();
         this.taskRepository = taskRepository;
     }
