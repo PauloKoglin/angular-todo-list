@@ -1,8 +1,7 @@
 package com.koglin.todolist.application.composition;
 
 import com.koglin.todolist.domain.useCases.SaveTask;
-import com.koglin.todolist.infra.gateways.SaveTaskDb;
-import com.koglin.todolist.presentation.TaskController;
+import com.koglin.todolist.presentation.controllers.TaskController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,9 +1,10 @@
 package com.koglin.todolist.presentation.routes;
 
-import com.koglin.todolist.presentation.TaskController;
+import com.koglin.todolist.presentation.controllers.TaskController;
+import com.koglin.todolist.presentation.helpers.RequestHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.function.RequestPredicates;
+import static org.springframework.web.servlet.function.RequestPredicates.*;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerResponse;
@@ -11,12 +12,13 @@ import org.springframework.web.servlet.function.ServerResponse;
 @Configuration
 public class TaskRouter {
 
+    private static final String taskPath = "/tasks";
+
     @Bean
     public RouterFunction<ServerResponse> routes(TaskController taskController) {
-        final String path = taskController.getPath();
         return RouterFunctions
-                .route(RequestPredicates.GET(path), request -> taskController.handle(request, taskController::getTasks) )
-                .andRoute(RequestPredicates.POST(path), request -> taskController.handle(request, taskController::saveTask));
+                .route(GET(taskPath), request -> RequestHandler.handle(request, taskController::getTasks))
+                .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::saveTask));
     }
 
 }
