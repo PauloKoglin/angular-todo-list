@@ -26,7 +26,7 @@ public class TaskController {
 
     public ServerResponse saveTask(HttpRequestAdapter request) {
         TaskPayload payload = request.body(TaskPayload.class);
-        final TaskModel newTask = new TaskModel(payload.getId(), payload.getDescription(), payload.getDone());
+        final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
         TaskModel savedTask = this.saveTask.perform(newTask);
         return ServerResponse
                 .ok()
