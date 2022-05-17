@@ -23,9 +23,7 @@ public class SaveTaskDb implements SaveTask {
             throw new RuntimeException("Description must be defined");
         }
         TaskEntity newTask = this.taskRepository.save(this.parseModelToEntity(task));
-
         task.setId(newTask.getId());
-
         return task;
     }
 

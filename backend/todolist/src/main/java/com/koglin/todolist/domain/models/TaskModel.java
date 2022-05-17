@@ -36,4 +36,17 @@ public class TaskModel {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskModel taskModel = (TaskModel) o;
+        return done == taskModel.done && Objects.equals(id, taskModel.id) && Objects.equals(description, taskModel.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

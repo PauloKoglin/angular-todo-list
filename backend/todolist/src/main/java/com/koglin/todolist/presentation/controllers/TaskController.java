@@ -6,8 +6,6 @@ import com.koglin.todolist.presentation.adapters.HttpRequestAdapter;
 import com.koglin.todolist.presentation.payloads.TaskPayload;
 import org.springframework.web.servlet.function.*;
 
-import java.util.List;
-
 public class TaskController {
 
     private final SaveTask saveTask;
