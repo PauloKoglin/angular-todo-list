@@ -100,4 +100,15 @@ public class TaskServiceTest {
 
         verify(taskRepositoryMock, times(1)).delete(input);
     }
+
+    @Test
+    void delete_should_return_deleted_task() {
+        final Long input = 1L;
+        final TaskModel findByIdResult = new TaskModel(input, "any_value", false);
+        when(taskRepositoryMock.findById(input)).thenReturn(Optional.of(findByIdResult));
+
+        TaskModel output = sut.delete(input);
+
+        assertEquals(findByIdResult, output);
+    }
 }
