@@ -26,14 +26,14 @@ public class TaskServiceTest {
         this.sut = new TaskService(this.taskRepositoryMock);
     }
     @Test
-    void Should_throw_if_empty_description_is_provided() {
+    void save_should_throw_if_empty_description_is_provided() {
         TaskModel task = new TaskModel(1L, "", false);
 
         assertThrows(RuntimeException.class, () -> sut.save(task));
     }
 
     @Test
-    void Should_call_repository_save_with_correct_params() {
+    void save_should_call_repository_save_with_correct_params() {
         TaskModel task = new TaskModel(null, "any_value", false);
         TaskModel expectedInput = new TaskModel(null, "any_value", false);
 
@@ -43,7 +43,7 @@ public class TaskServiceTest {
     }
 
     @Test
-    void Should_return_saved_task() {
+    void save_should_return_saved_task() {
         TaskModel input = new TaskModel(null, "any_value", false);
         when(taskRepositoryMock.save(any(TaskModel.class))).thenReturn(new TaskModel(15L, "any_value", false));
 
@@ -61,7 +61,7 @@ public class TaskServiceTest {
     }
 
     @Test
-    void Should_return_tasks_returned_from_repository() {
+    void findAll_should_return_tasks_returned_from_repository() {
         List<TaskModel> tasks = new ArrayList<>();
         tasks.add(new TaskModel(1L, "any_value", true));
         tasks.add(new TaskModel(2L, "any_value", false));
