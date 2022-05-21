@@ -26,6 +26,6 @@ public class TaskController {
         final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
         return ServerResponse
                 .ok()
-                .body(this.taskService.perform(newTask));
+                .body(this.taskService.save(newTask));
     }
 }

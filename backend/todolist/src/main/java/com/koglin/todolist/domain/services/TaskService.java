@@ -14,7 +14,7 @@ public class TaskService {
     }
 
     @Transactional
-    public TaskModel perform(TaskModel task) {
+    public TaskModel save(TaskModel task) {
         if (task.getDescription().isEmpty()) {
             throw new RuntimeException("Description must be defined");
         }

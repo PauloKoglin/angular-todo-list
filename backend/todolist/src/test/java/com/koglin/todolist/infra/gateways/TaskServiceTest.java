@@ -27,7 +27,7 @@ public class TaskServiceTest {
     void Should_throw_if_empty_description_is_provided() {
         TaskModel task = new TaskModel(1L, "", false);
 
-        assertThrows(RuntimeException.class, () -> sut.perform(task));
+        assertThrows(RuntimeException.class, () -> sut.save(task));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TaskServiceTest {
         TaskModel task = new TaskModel(null, "any_value", false);
         TaskModel expectedInput = new TaskModel(null, "any_value", false);
 
-        sut.perform(task);
+        sut.save(task);
 
         verify(taskRepositoryMock).save(argThat(arg -> arg.equals(expectedInput)));
     }
@@ -45,7 +45,7 @@ public class TaskServiceTest {
         TaskModel input = new TaskModel(null, "any_value", false);
         when(taskRepositoryMock.save(any(TaskModel.class))).thenReturn(new TaskModel(15L, "any_value", false));
 
-        TaskModel output = sut.perform(input);
+        TaskModel output = sut.save(input);
 
         final TaskModel expectedOutput = new TaskModel(15L, "any_value", false);
         assertEquals(output, expectedOutput);
