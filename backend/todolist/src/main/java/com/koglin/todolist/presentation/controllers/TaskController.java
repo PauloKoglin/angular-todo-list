@@ -1,7 +1,7 @@
 package com.koglin.todolist.presentation.controllers;
 
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.domain.services.TaskService;
+import com.koglin.todolist.domain.contracts.services.TaskService;
 import com.koglin.todolist.presentation.adapters.HttpRequestAdapter;
 import com.koglin.todolist.presentation.payloads.TaskPayload;
 import org.springframework.web.servlet.function.*;
