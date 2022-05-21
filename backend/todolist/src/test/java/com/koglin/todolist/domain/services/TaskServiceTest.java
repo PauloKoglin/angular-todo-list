@@ -71,4 +71,11 @@ public class TaskServiceTest {
 
         assertEquals(output, tasks);
     }
+
+    @Test
+    void delete_should_call_repository_findById_with_correct_param() {
+        sut.delete(1L);
+
+        verify(taskRepositoryMock, times(1)).findById(1L);
+    }
 }

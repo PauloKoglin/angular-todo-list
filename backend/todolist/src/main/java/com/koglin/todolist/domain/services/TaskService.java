@@ -2,9 +2,11 @@ package com.koglin.todolist.domain.services;
 
 import com.koglin.todolist.domain.contracts.repositories.TaskRepository;
 import com.koglin.todolist.domain.models.TaskModel;
+import com.koglin.todolist.infra.database.entities.TaskEntity;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public class TaskService {
     private final TaskRepository taskRepository;
@@ -23,5 +25,11 @@ public class TaskService {
 
     public List<TaskModel> findAll() {
         return taskRepository.findAll();
+    }
+
+    public TaskModel delete(Long id) {
+        Optional<TaskModel> task = taskRepository.findById(id);
+
+        return null;
     }
 }
