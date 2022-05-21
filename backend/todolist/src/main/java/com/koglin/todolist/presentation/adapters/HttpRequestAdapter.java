@@ -22,4 +22,8 @@ public class HttpRequestAdapter {
         }
     }
 
+    public String pathVariable(String name) {
+        return request.pathVariable(name);
+    }
+
 }

@@ -27,6 +27,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    @Transactional
     public TaskModel delete(Long id) {
         Optional<TaskModel> task = taskRepository.findById(id);
         if (task.isEmpty()) {
