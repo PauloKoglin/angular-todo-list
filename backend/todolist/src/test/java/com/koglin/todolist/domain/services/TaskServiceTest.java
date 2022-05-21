@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 public class TaskServiceTest {
@@ -48,5 +51,17 @@ public class TaskServiceTest {
 
         final TaskModel expectedOutput = new TaskModel(15L, "any_value", false);
         assertEquals(output, expectedOutput);
+    }
+
+    @Test
+    void Should_return_tasks_returned_from_repository() {
+        List<TaskModel> tasks = new ArrayList<>();
+        tasks.add(new TaskModel(1L, "any_value", true));
+        tasks.add(new TaskModel(2L, "any_value", false));
+        when(taskRepositoryMock.findAll()).thenReturn(tasks);
+
+        List<TaskModel> output = sut.findAll();
+
+        assertEquals(output, tasks);
     }
 }
