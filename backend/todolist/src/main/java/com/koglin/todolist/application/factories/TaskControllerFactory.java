@@ -1,4 +1,4 @@
-package com.koglin.todolist.application.composition;
+package com.koglin.todolist.application.factories;
 
 import com.koglin.todolist.domain.services.TaskService;
 import com.koglin.todolist.presentation.controllers.TaskController;
