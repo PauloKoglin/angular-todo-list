@@ -54,6 +54,13 @@ public class TaskServiceTest {
     }
 
     @Test
+    void findAll_should_call_repository_once() {
+        sut.findAll();
+
+        verify(taskRepositoryMock, times(1)).findAll();
+    }
+
+    @Test
     void Should_return_tasks_returned_from_repository() {
         List<TaskModel> tasks = new ArrayList<>();
         tasks.add(new TaskModel(1L, "any_value", true));
