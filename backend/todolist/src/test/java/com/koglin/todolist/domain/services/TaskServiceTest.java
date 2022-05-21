@@ -1,8 +1,7 @@
-package com.koglin.todolist.infra.gateways;
+package com.koglin.todolist.domain.services;
 
 import com.koglin.todolist.domain.contracts.repositories.TaskRepository;
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.domain.services.TaskService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
