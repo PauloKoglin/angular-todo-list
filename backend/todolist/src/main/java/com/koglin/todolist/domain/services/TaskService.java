@@ -32,7 +32,7 @@ public class TaskService {
         if (task.isEmpty()) {
             throw new ModelNotFoundException(String.format("Task with id \"%d\" was not found", id));
         }
-
+        taskRepository.delete(id);
         return null;
     }
 }

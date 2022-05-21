@@ -89,4 +89,15 @@ public class TaskServiceTest {
 
         assertThrows(ModelNotFoundException.class, () -> sut.delete(input), "Task with id \"1\" was not found");
     }
+
+    @Test
+    void delete_should_call_repository_delete_if_task_was_found() {
+        final Long input = 1L;
+        final TaskModel findByIdResult = new TaskModel(input, "any_value", false);
+        when(taskRepositoryMock.findById(input)).thenReturn(Optional.of(findByIdResult));
+
+        sut.delete(input);
+
+        verify(taskRepositoryMock, times(1)).delete(input);
+    }
 }
