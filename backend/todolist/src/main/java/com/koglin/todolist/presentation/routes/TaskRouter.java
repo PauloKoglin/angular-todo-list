@@ -18,7 +18,8 @@ public class TaskRouter {
     public RouterFunction<ServerResponse> routes(TaskController taskController) {
         return RouterFunctions
                 .route(GET(taskPath), request -> RequestHandler.handle(taskController::getTasks))
-                .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::saveTask));
+                .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::saveTask))
+                .andRoute(PUT(taskPath), request -> RequestHandler.handle(request, taskController::saveTask));
     }
 
 }
