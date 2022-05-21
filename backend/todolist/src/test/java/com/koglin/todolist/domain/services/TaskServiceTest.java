@@ -1,6 +1,7 @@
 package com.koglin.todolist.domain.services;
 
 import com.koglin.todolist.domain.contracts.repositories.TaskRepository;
+import com.koglin.todolist.domain.exceptions.ModelNotFoundException;
 import com.koglin.todolist.domain.models.TaskModel;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -22,6 +24,7 @@ public class TaskServiceTest {
     void beforeEach() {
         this.taskRepositoryMock = mock(TaskRepository.class);
         when(taskRepositoryMock.save(any(TaskModel.class))).thenReturn(new TaskModel(1L, "any_value", false));
+        when(taskRepositoryMock.findById(any())).thenReturn(Optional.of(new TaskModel(1L, "any_value", false)));
 
         this.sut = new TaskService(this.taskRepositoryMock);
     }
@@ -77,5 +80,13 @@ public class TaskServiceTest {
         sut.delete(1L);
 
         verify(taskRepositoryMock, times(1)).findById(1L);
+    }
+
+    @Test
+    void delete_should_throw_if_findById_returns_empty() {
+        final Long input = 1L;
+        when(taskRepositoryMock.findById(input)).thenReturn(Optional.empty());
+
+        assertThrows(ModelNotFoundException.class, () -> sut.delete(input), "Task with id \"1\" was not found");
     }
 }

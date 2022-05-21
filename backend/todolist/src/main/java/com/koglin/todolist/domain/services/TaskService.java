@@ -1,8 +1,8 @@
 package com.koglin.todolist.domain.services;
 
 import com.koglin.todolist.domain.contracts.repositories.TaskRepository;
+import com.koglin.todolist.domain.exceptions.ModelNotFoundException;
 import com.koglin.todolist.domain.models.TaskModel;
-import com.koglin.todolist.infra.database.entities.TaskEntity;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,6 +29,9 @@ public class TaskService {
 
     public TaskModel delete(Long id) {
         Optional<TaskModel> task = taskRepository.findById(id);
+        if (task.isEmpty()) {
+            throw new ModelNotFoundException(String.format("Task with id \"%d\" was not found", id));
+        }
 
         return null;
     }
