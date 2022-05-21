@@ -6,14 +6,13 @@ import com.koglin.todolist.domain.models.TaskModel;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public class TaskService implements com.koglin.todolist.domain.contracts.services.TaskService {
+public class TaskService {
     private final TaskRepository taskRepository;
     public TaskService(TaskRepository taskRepository) {
         super();
         this.taskRepository = taskRepository;
     }
 
-    @Override
     @Transactional
     public TaskModel perform(TaskModel task) {
         if (task.getDescription().isEmpty()) {
@@ -22,7 +21,6 @@ public class TaskService implements com.koglin.todolist.domain.contracts.service
         return this.taskRepository.save(task);
     }
 
-    @Override
     public List<TaskModel> findAll() {
         return taskRepository.findAll();
     }

@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 public class TaskServiceTest {
 
     private TaskRepository taskRepositoryMock;
-    private com.koglin.todolist.domain.contracts.services.TaskService sut;
+    private TaskService sut;
 
     @BeforeEach
     void beforeEach() {
