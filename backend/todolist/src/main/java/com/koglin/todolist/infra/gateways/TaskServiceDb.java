@@ -29,9 +29,10 @@ public class TaskServiceDb implements TaskService {
 
     @Override
     public List<TaskModel> findAll() {
-        return taskRepository.findAll().stream().map(
-                task -> new TaskModel(task.getId(), task.getDescription(), task.getDone())
-        ).collect(Collectors.toList());
+        return taskRepository.findAll()
+                .stream()
+                .map(this::parseEntityToModel)
+                .collect(Collectors.toList());
     }
 
     private TaskEntity parseModelToEntity(TaskModel taskModel) {
@@ -39,6 +40,14 @@ public class TaskServiceDb implements TaskService {
                 taskModel.getId(),
                 taskModel.getDescription(),
                 taskModel.isDone()
+        );
+    }
+
+    private TaskModel parseEntityToModel(TaskEntity taskEntity) {
+        return new TaskModel(
+                taskEntity.getId(),
+                taskEntity.getDescription(),
+                taskEntity.getDone()
         );
     }
 }
