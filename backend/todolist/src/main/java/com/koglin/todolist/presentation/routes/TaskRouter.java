@@ -17,7 +17,7 @@ public class TaskRouter {
     @Bean
     public RouterFunction<ServerResponse> routes(TaskController taskController) {
         return RouterFunctions
-                .route(GET(taskPath), request -> RequestHandler.handle(taskController::getTasks))
+                .route(GET(taskPath), request -> RequestHandler.handle(taskController::get))
                 .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::post))
                 .andRoute(PUT(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::put))
                 .andRoute(DELETE(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::delete));

@@ -15,7 +15,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    public ServerResponse getTasks() {
+    public ServerResponse get() {
         return ServerResponse
                 .ok()
                 .body(this.taskService.findAll());
