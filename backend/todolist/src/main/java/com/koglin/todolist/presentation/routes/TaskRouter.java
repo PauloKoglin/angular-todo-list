@@ -18,6 +18,7 @@ public class TaskRouter {
     public RouterFunction<ServerResponse> routes(TaskController taskController) {
         return RouterFunctions
                 .route(GET(taskPath), request -> RequestHandler.handle(taskController::get))
+                .andRoute(GET(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::getById))
                 .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::post))
                 .andRoute(PUT(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::put))
                 .andRoute(DELETE(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::delete));

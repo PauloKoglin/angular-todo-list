@@ -21,6 +21,13 @@ public class TaskController {
                 .body(this.taskService.findAll());
     }
 
+    public ServerResponse getById(HttpRequestAdapter request) {
+        Long id = Long.parseLong(request.pathVariable("id"));
+        return ServerResponse
+                .ok()
+                .body(this.taskService.findById(id));
+    }
+
     public ServerResponse post(HttpRequestAdapter request) {
         TaskPayload payload = request.body(TaskPayload.class);
         final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
