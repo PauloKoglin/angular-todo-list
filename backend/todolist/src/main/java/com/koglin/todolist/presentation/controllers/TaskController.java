@@ -21,6 +21,15 @@ public class TaskController {
                 .body(this.taskService.findAll());
     }
 
+    public ServerResponse post(HttpRequestAdapter request) {
+        TaskPayload payload = request.body(TaskPayload.class);
+        final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
+        final TaskModel createdTask = this.taskService.save(newTask);
+        return ServerResponse
+                .created(request.buildPostUri(createdTask.getId().toString()))
+                .build();
+    }
+
     public ServerResponse saveTask(HttpRequestAdapter request) {
         TaskPayload payload = request.body(TaskPayload.class);
         final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());

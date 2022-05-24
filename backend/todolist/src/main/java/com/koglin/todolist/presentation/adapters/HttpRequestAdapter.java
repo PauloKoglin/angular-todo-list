@@ -1,6 +1,9 @@
 package com.koglin.todolist.presentation.adapters;
 
 import org.springframework.web.servlet.function.ServerRequest;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 public class HttpRequestAdapter {
 
@@ -24,6 +27,10 @@ public class HttpRequestAdapter {
 
     public String pathVariable(String name) {
         return request.pathVariable(name);
+    }
+
+    public URI buildPostUri(String id) {
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
 
 }
