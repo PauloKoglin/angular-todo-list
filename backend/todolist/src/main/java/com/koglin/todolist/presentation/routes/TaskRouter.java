@@ -19,7 +19,7 @@ public class TaskRouter {
         return RouterFunctions
                 .route(GET(taskPath), request -> RequestHandler.handle(taskController::getTasks))
                 .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::post))
-                .andRoute(PUT(taskPath), request -> RequestHandler.handle(request, taskController::saveTask))
+                .andRoute(PUT(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::put))
                 .andRoute(DELETE(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::deleteTask));
     }
 }

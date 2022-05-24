@@ -30,12 +30,14 @@ public class TaskController {
                 .build();
     }
 
-    public ServerResponse saveTask(HttpRequestAdapter request) {
+    public ServerResponse put(HttpRequestAdapter request) {
+        Long id = Long.parseLong(request.pathVariable("id"));
         TaskPayload payload = request.body(TaskPayload.class);
-        final TaskModel newTask = new TaskModel(payload.id(), payload.description(), payload.done());
+        final TaskModel newTask = new TaskModel(id, payload.description(), payload.done());
+        this.taskService.save(newTask);
         return ServerResponse
-                .ok()
-                .body(this.taskService.save(newTask));
+                .noContent()
+                .build();
     }
 
     public ServerResponse deleteTask(HttpRequestAdapter request) {
