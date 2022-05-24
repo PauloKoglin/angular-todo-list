@@ -76,6 +76,34 @@ public class TaskServiceTest {
     }
 
     @Test
+    void findById_should_call_repository_once() {
+        final Long input = 10L;
+
+        sut.findById(input);
+
+        verify(taskRepositoryMock, times(1)).findById(input);
+    }
+
+    @Test
+    void findById_should_throw_if_repository_returns_empty() {
+        final Long input = 1L;
+        when(taskRepositoryMock.findById(input)).thenReturn(Optional.empty());
+
+        assertThrows(ModelNotFoundException.class, () -> sut.findById(input), "Task with id \"1\" was not found");
+    }
+
+    @Test
+    void findById_should_return_if_repository_returns() {
+        final Long input = 1L;
+        TaskModel expectedOutput = new TaskModel(1L, "any_value", true);
+        when(taskRepositoryMock.findById(input)).thenReturn(Optional.of(new TaskModel(1L, "any_value", true)));
+
+        TaskModel actual = sut.findById(input);
+
+        assertEquals(expectedOutput, actual);
+    }
+
+    @Test
     void delete_should_call_repository_findById_with_correct_param() {
         sut.delete(1L);
 

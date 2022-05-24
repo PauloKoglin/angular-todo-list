@@ -27,13 +27,18 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    @Transactional
-    public TaskModel delete(Long id) {
+    public TaskModel findById(Long id) {
         Optional<TaskModel> task = taskRepository.findById(id);
         if (task.isEmpty()) {
             throw new ModelNotFoundException(String.format("Task with id \"%d\" was not found", id));
         }
-        taskRepository.delete(id);
         return task.get();
+    }
+
+    @Transactional
+    public TaskModel delete(Long id) {
+        TaskModel task = this.findById(id);
+        taskRepository.delete(id);
+        return task;
     }
 }
