@@ -40,7 +40,7 @@ public class TaskController {
                 .build();
     }
 
-    public ServerResponse deleteTask(HttpRequestAdapter request) {
+    public ServerResponse delete(HttpRequestAdapter request) {
         Long id = Long.parseLong(request.pathVariable("id"));
         taskService.delete(id);
         return ServerResponse
