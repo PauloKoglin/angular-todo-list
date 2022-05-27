@@ -22,18 +22,23 @@ public class TaskControllerITTest {
 
     @BeforeAll
     public void beforeAll() {
-        this.setupDatabase();
+        this.resetDatabase();
     }
 
-    private void setupDatabase() {
+    private void insertTasksToDatabase() {
         repositoryJpa.saveAll(List.of(
                 new TaskEntity(null, "task 1", false),
                 new TaskEntity(null, "task 2", true)
         ));
     }
 
+    private void resetDatabase() {
+        repositoryJpa.deleteAll();
+    }
+
     @Test
     public void get_should_return_status_code_200_with_correct_response(@Autowired WebTestClient client) {
+        this.insertTasksToDatabase();
         final String expectedJson = """                
                 [
                     {
@@ -48,6 +53,16 @@ public class TaskControllerITTest {
                     }
                 ]
                 """;
+
+        client.get().uri("/tasks")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody().json(expectedJson);
+    }
+
+    @Test
+    public void get_should_return_status_code_200_with_empty_task_list(@Autowired WebTestClient client) {
+        final String expectedJson = "[]";
 
         client.get().uri("/tasks")
                 .exchange()
