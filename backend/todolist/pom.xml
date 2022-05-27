@@ -44,6 +44,15 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
+		<!--Dependency added because the integrations tests crashed on MacOs M1 for any reason.
+		https://medium.com/@boysbee/unable-to-load-io-netty-resolver-dns-macos-macosdnsserveraddressstreamprovider-46d89bf74d42-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-resolver-dns-native-macos</artifactId>
+			<version>4.1.77.Final</version>
+			<classifier>osx-aarch_64</classifier>
+		</dependency>
+
 		<!-- TEST DEPENDENCIES -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
