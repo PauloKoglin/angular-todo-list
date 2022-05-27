@@ -1,10 +1,23 @@
+# DEV
 spring:
+  profiles: dev
   application:
     name: todolist
   datasource:
     url: "jdbc:postgresql://localhost:54321/todolist"
     username: "postgres"
     password: "todolist-db"
+  jpa:
+    show-sql: true
+    hibernate:
+      # Create tables automatically
+      ddl-auto: update
+---
+# DEV
+spring:
+  profiles: test
+  application:
+    name: todolist
   jpa:
     show-sql: true
     hibernate:
