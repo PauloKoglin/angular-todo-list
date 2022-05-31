@@ -1,7 +1,7 @@
 package com.koglin.todolist.presentation.routes;
 
 import com.koglin.todolist.presentation.controllers.TaskController;
-import com.koglin.todolist.presentation.helpers.RequestHandler;
+import com.koglin.todolist.presentation.helpers.CustomRequestHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import static org.springframework.web.servlet.function.RequestPredicates.*;
@@ -17,10 +17,10 @@ public class TaskRouter {
     @Bean
     public RouterFunction<ServerResponse> routes(TaskController taskController) {
         return RouterFunctions
-                .route(GET(taskPath), request -> RequestHandler.handle(taskController::get))
-                .andRoute(GET(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::getById))
-                .andRoute(POST(taskPath), request -> RequestHandler.handle(request, taskController::post))
-                .andRoute(PUT(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::put))
-                .andRoute(DELETE(taskPath + "/{id}"), request -> RequestHandler.handle(request, taskController::delete));
+                .route(GET(taskPath), request -> CustomRequestHandler.handle(request, taskController::get))
+                .andRoute(GET(taskPath + "/{id}"), request -> CustomRequestHandler.handle(request, taskController::getById))
+                .andRoute(POST(taskPath), request -> CustomRequestHandler.handle(request, taskController::post))
+                .andRoute(PUT(taskPath + "/{id}"), request -> CustomRequestHandler.handle(request, taskController::put))
+                .andRoute(DELETE(taskPath + "/{id}"), request -> CustomRequestHandler.handle(request, taskController::delete));
     }
 }
