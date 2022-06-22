@@ -1,4 +1,4 @@
-package com.koglin.todolist.infra.messaging.kafka;
+package com.koglin.todolist.infra.messaging.kafka.producers;
 
 import com.koglin.todolist.domain.contracts.gateways.EventDispatcher;
 import com.koglin.todolist.domain.events.EventIdentification;

@@ -5,7 +5,7 @@ import com.koglin.todolist.domain.usecases.task.DeleteTaskByIdUseCase;
 import com.koglin.todolist.domain.usecases.task.FindAllTasksUseCase;
 import com.koglin.todolist.domain.usecases.task.FindTaskByIdUseCase;
 import com.koglin.todolist.domain.usecases.task.SaveTaskUseCase;
-import com.koglin.todolist.infra.messaging.kafka.KafkaTaskDeletedTopicProducer;
+import com.koglin.todolist.infra.messaging.kafka.producers.KafkaTaskDeletedTopicProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
