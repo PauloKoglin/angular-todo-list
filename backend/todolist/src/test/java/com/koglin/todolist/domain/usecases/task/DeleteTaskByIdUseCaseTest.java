@@ -1,6 +1,9 @@
 package com.koglin.todolist.domain.usecases.task;
 
+import com.koglin.todolist.domain.contracts.gateways.EventDispatcher;
 import com.koglin.todolist.domain.contracts.repositories.TaskRepository;
+import com.koglin.todolist.domain.events.EventIdentification;
+import com.koglin.todolist.domain.events.TaskDeletedEventContent;
 import com.koglin.todolist.domain.exceptions.ModelNotFoundException;
 import com.koglin.todolist.domain.models.TaskModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,17 +21,24 @@ public class DeleteTaskByIdUseCaseTest {
 
     private TaskRepository taskRepositoryMock;
     private FindTaskByIdUseCase findTaskByIdUseCaseMock;
+
+    private EventDispatcher<TaskDeletedEventContent> eventDispatcher;
     private DeleteTaskByIdUseCase sut;
 
     @BeforeEach
     void beforeEach() {
         this.taskRepositoryMock = mock(TaskRepository.class);
         this.findTaskByIdUseCaseMock = mock(FindTaskByIdUseCase.class);
+        this.eventDispatcher = mock(EventDispatcher.class);
 
         when(taskRepositoryMock.save(any(TaskModel.class))).thenReturn(new TaskModel(1L, "any_value", false));
-        when(taskRepositoryMock.findById(any())).thenReturn(Optional.of(new TaskModel(1L, "any_value", false)));
+        when(findTaskByIdUseCaseMock.handle(any())).thenReturn(new TaskModel(1L, "any_value", false));
 
-        this.sut = new DeleteTaskByIdUseCase(this.taskRepositoryMock, this.findTaskByIdUseCaseMock);
+        this.sut = new DeleteTaskByIdUseCase(
+            this.taskRepositoryMock,
+            this.findTaskByIdUseCaseMock,
+            this.eventDispatcher
+        );
     }
 
     @Test
@@ -66,5 +76,16 @@ public class DeleteTaskByIdUseCaseTest {
         TaskModel output = sut.handle(input);
 
         assertEquals(findByIdResult, output);
+    }
+
+    @Test
+    void should_dispatch_event_if_task_has_been_deleted() {
+        when(findTaskByIdUseCaseMock.handle(any())).thenReturn(new TaskModel(999L, "any_description", false));
+        final Long input = 1L;
+
+        TaskModel output = sut.handle(input);
+
+        TaskDeletedEventContent expectedContent = new TaskDeletedEventContent(999L, "any_description");
+        verify(eventDispatcher, times(1)).dispatch(EventIdentification.TASK_DELETED, expectedContent);
     }
 }
